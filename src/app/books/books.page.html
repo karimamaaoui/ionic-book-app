@@ -1,0 +1,52 @@
+<ion-header collapse="condense">
+  <ion-toolbar>
+    <ion-title size="large">Books</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form (ngSubmit)="addBook()">
+    <ion-item>
+      <ion-label position="floating">Title</ion-label>
+      <ion-input [(ngModel)]="title" name="title" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Author</ion-label>
+      <ion-input [(ngModel)]="author" name="author" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit"  color="primary" [disabled]="!title || !author">Add Book</ion-button>
+  </form>
+
+@if(allBooks ){
+
+
+  <ion-list class="book-list">
+    @for(book of allBooks; track $index){
+
+      
+    <ion-item class="book-item">
+      <ion-label>
+        <h2 class="book-title">{{ book.title }}</h2>
+        <p class="book-author">Author: {{ book.author || 'Unknown' }}</p>
+      </ion-label>
+         <!-- Update Button -->
+         <ion-button slot="end" fill="solid" color="tertiary" (click)="openUpdate(book.id)">
+          <ion-icon slot="icon-only" name="create"></ion-icon>
+        </ion-button>
+  
+      <ion-button slot="end" fill="solid" color="danger" (click)="deleteBook(book.id)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+    }
+  </ion-list>
+}
+  @if(allBooks.length===0){
+
+    <div >
+      <p>No books added yet.</p>
+    </div>
+  }
+</ion-content>

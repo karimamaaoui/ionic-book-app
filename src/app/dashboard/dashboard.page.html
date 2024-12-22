@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Hi, {{ currentUserEmail }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container [ngSwitch]="selectedTab">
+    <app-list-books *ngSwitchCase="'list-books'"></app-list-books> 
+    <app-profile *ngSwitchCase="'profile'"></app-profile> 
+    <app-books *ngSwitchCase="'books'"></app-books>
+    <div *ngSwitchDefault>
+      <h2>Welcome to the Dashboard!</h2> 
+    </div>
+  </ng-container>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <!-- Bottom Navigation Segment -->
+    <ion-segment [(ngModel)]="selectedTab" (ionChange)="onTabChange()">
+      <ion-segment-button value="list-books">
+        <ion-label>Home</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="profile">
+        <ion-label>Profile</ion-label>
+      </ion-segment-button>
+
+   
+      <ion-segment-button value="books">
+        <ion-label>Books</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>  
+</ion-footer>
